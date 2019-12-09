@@ -17,12 +17,13 @@
             
             >
             <ImageView
-                android:src="drawable/new"
+                android:src="@drawable/hinhmoi"
                 android:layout_gravity="top|right"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <LinearLayout
                 android:gravity="center"
+                android:layout_gravity="center"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +44,6 @@
 
                 <TextView
                     android:gravity="center"
-                    android:text="Giá"
                     android:textColor="#f20"
                     android:textSize="17dp"
                     android:id="@+id/textViewgiasp"

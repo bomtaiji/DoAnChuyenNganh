@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -31,7 +32,9 @@ import java.util.ArrayList;
 
 import vn.edu.stu.doanchuyennganh.R;
 import vn.edu.stu.doanchuyennganh.adapter.LoaispAdapter;
+import vn.edu.stu.doanchuyennganh.adapter.SanphamAdapter;
 import vn.edu.stu.doanchuyennganh.model.LoaiSanPham;
+import vn.edu.stu.doanchuyennganh.model.SanPham;
 import vn.edu.stu.doanchuyennganh.ultil.Kiemtraketnoi;
 import vn.edu.stu.doanchuyennganh.ultil.Server;
 
@@ -49,6 +52,8 @@ public class Home extends AppCompatActivity {
     String tenloaisp="";
     String hinhanhloaiSp="";
 
+    ArrayList<SanPham> mangsanpham;
+    SanphamAdapter sanphamAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +62,9 @@ public class Home extends AppCompatActivity {
        if(Kiemtraketnoi.haveNetworkConnection(getApplicationContext())) {
            addEvents();
            ActionViewFlipper();
-           GetDuLieuSP();
+           GetDuLieuLoaiSP();
+           GetDuLieuSPMoi();
+           
        }
        else {
            Kiemtraketnoi.Show(getApplicationContext(),"Bạn hãy kiểm tra lại kết nối");
@@ -65,7 +72,50 @@ public class Home extends AppCompatActivity {
        }
     }
 
-    private void GetDuLieuSP() {
+    private void GetDuLieuSPMoi() {
+        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
+        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Server.DuongDanSanPham, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response != null) {
+                    int Id = 0;
+                    String Tensp = "";
+                    Integer Giasp = 0;
+                    String Hinhanh = "";
+                    String Mota = "";
+                    int Loaisp = 0;
+                    for(int i=0;i<response.length();i++)
+                    {
+                        try {
+                            JSONObject jsonObject= response.getJSONObject(i);
+                            Id= jsonObject.getInt("Id_SanPham");
+                            Tensp= jsonObject.getString("Ten_SanPham");
+                            Giasp= jsonObject.getInt("Gia");
+                            Hinhanh= jsonObject.getString("Hinh_Anh");
+                            Mota= jsonObject.getString("Mo_Ta");
+                            Loaisp=jsonObject.getInt("Id_Loai_SanPham");
+
+                            mangsanpham.add(new SanPham(Id,Tensp,Giasp,Hinhanh,Mota,Loaisp));
+                            sanphamAdapter.notifyDataSetChanged();
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+    requestQueue.add(jsonArrayRequest);
+    }
+
+    private void GetDuLieuLoaiSP() {
     RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
         JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Server.DuongDanLoaiSP, new Response.Listener<JSONArray>() {
             @Override
@@ -138,15 +188,21 @@ public class Home extends AppCompatActivity {
     }
 
     private void addContent() {
-        drawerLayout= findViewById(R.id.drawerLayout);
-        toolbar =findViewById(R.id.toolbarmanhinhchinh);
-        viewFlipper=(ViewFlipper) findViewById(R.id.viewflipper);
-        recyclerView=(RecyclerView) findViewById(R.id.recyclerview);
-        navigationView=(NavigationView) findViewById(R.id.navigationView);
-        listViewmanghinhchinh=(ListView) findViewById(R.id.listViewmanhinhchinh);
-        mangloaisp=new ArrayList<>();
-        mangloaisp.add(0, new LoaiSanPham("TrangChinh","https://thuycanhmiennam.com/wp-content/uploads/2017/04/icon-home-cam.png"));
-        loaispAdapter=new LoaispAdapter(mangloaisp,getApplicationContext());
+        drawerLayout = findViewById(R.id.drawerLayout);
+        toolbar = findViewById(R.id.toolbarmanhinhchinh);
+        viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        navigationView = (NavigationView) findViewById(R.id.navigationView);
+        listViewmanghinhchinh = (ListView) findViewById(R.id.listViewmanhinhchinh);
+        mangloaisp = new ArrayList<>();
+        mangloaisp.add(0, new LoaiSanPham("TrangChinh", "https://thuycanhmiennam.com/wp-content/uploads/2017/04/icon-home-cam.png"));
+        loaispAdapter = new LoaispAdapter(mangloaisp, getApplicationContext());
         listViewmanghinhchinh.setAdapter(loaispAdapter);
+
+        mangsanpham = new ArrayList<>();
+        sanphamAdapter = new SanphamAdapter(getApplicationContext(), mangsanpham);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+        recyclerView.setAdapter(sanphamAdapter);
     }
 }
