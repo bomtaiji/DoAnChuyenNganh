@@ -3,7 +3,7 @@
     package="vn.edu.stu.doanchuyennganh">
 
     <uses-permission android:name="android.permission.INTERNET " />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activiti.Home"></activity>
+        <activity android:name=".activiti.ThongTinActivity"></activity>
+        <activity android:name=".activiti.LienheActivity" />
+        <activity android:name=".activiti.kemActivity" />
+        <activity android:name=".activiti.BunActivity" />
+        <activity android:name=".activiti.BanhActivity" />
+        <activity android:name=".activiti.ComActivity" />
+        <activity android:name=".activiti.Home" />
         <activity android:name=".activiti.DangKi" />
         <activity android:name=".activiti.DangNhap" />
         <activity android:name=".activiti.MainActivity">

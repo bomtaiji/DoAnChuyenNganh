@@ -7,10 +7,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ViewFlipper;
@@ -46,6 +48,7 @@ public class Home extends AppCompatActivity {
     NavigationView navigationView;
     ListView listViewmanghinhchinh;
     DrawerLayout drawerLayout;
+
     ArrayList<LoaiSanPham> mangloaisp;
     LoaispAdapter loaispAdapter;
     int id=0;
@@ -185,6 +188,81 @@ public class Home extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+        listViewmanghinhchinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        if (Kiemtraketnoi.haveNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(Home.this, Home.class);
+                            startActivity(intent);
+                        } else {
+                            Kiemtraketnoi.Show(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
+                        }
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                    case 1:
+                        if (Kiemtraketnoi.haveNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(Home.this, ComActivity.class);
+                            intent.putExtra("idloaisanpham",mangloaisp.get(position).getId());
+                            startActivity(intent);
+                        } else {
+                            Kiemtraketnoi.Show(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
+                        }
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                    case 2:
+                        if (Kiemtraketnoi.haveNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(Home.this,BanhActivity.class);
+                            intent.putExtra("idloaisanpham",mangloaisp.get(position).getId());
+                            startActivity(intent);
+                        } else {
+                            Kiemtraketnoi.Show(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
+                        }
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                    case 3:
+                        if (Kiemtraketnoi.haveNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(Home.this, BunActivity.class);
+                            intent.putExtra("idloaisanpham",mangloaisp.get(position).getId());
+                            startActivity(intent);
+                        } else {
+                            Kiemtraketnoi.Show(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
+                        }
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                    case 4:
+                        if (Kiemtraketnoi.haveNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(Home.this, kemActivity.class);
+                            intent.putExtra("idloaisanpham",mangloaisp.get(position).getId());
+                            startActivity(intent);
+                        } else {
+                            Kiemtraketnoi.Show(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
+                        }
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                    case 5:
+                        if (Kiemtraketnoi.haveNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(Home.this, LienheActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Kiemtraketnoi.Show(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
+                        }
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                    case 6:
+                        if (Kiemtraketnoi.haveNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(Home.this, ThongTinActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Kiemtraketnoi.Show(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
+                        }
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                }
+            }
+        });
+
     }
 
     private void addContent() {
@@ -194,6 +272,7 @@ public class Home extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         listViewmanghinhchinh = (ListView) findViewById(R.id.listViewmanhinhchinh);
+
         mangloaisp = new ArrayList<>();
         mangloaisp.add(0, new LoaiSanPham("TrangChinh", "https://thuycanhmiennam.com/wp-content/uploads/2017/04/icon-home-cam.png"));
         loaispAdapter = new LoaispAdapter(mangloaisp, getApplicationContext());
