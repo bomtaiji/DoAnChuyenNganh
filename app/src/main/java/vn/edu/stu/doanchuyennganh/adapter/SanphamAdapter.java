@@ -1,6 +1,7 @@
 package vn.edu.stu.doanchuyennganh.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import vn.edu.stu.doanchuyennganh.R;
+import vn.edu.stu.doanchuyennganh.activiti.ChiTietSanPham;
 import vn.edu.stu.doanchuyennganh.model.SanPham;
+import vn.edu.stu.doanchuyennganh.ultil.Kiemtraketnoi;
 
 public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.ItemHolder> {
 
@@ -63,6 +66,17 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.ItemHold
             imageviewsp =(ImageView) itemView.findViewById(R.id.imgsanphammoi);
             txtTensp=(TextView) itemView.findViewById(R.id.textViewtensp);
             txtgiasp=(TextView) itemView.findViewById(R.id.textViewgiasp);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent= new Intent(context, ChiTietSanPham.class);
+                    intent.putExtra("thongtinsanpham",arrSanPham.get(getPosition()));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Kiemtraketnoi.Show(context,arrSanPham.get(getPosition()).getTensp());
+                    context.startActivity(intent);
+
+                }
+            });
         }
     }
 }
