@@ -44,8 +44,6 @@ public class ComAdapter extends BaseAdapter {
     public class ViewHolder{
         public TextView txtTenCom,txtGiaCom,txtMotaCom;
         public ImageView imageViewCom;
-
-
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

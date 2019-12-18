@@ -1,5 +1,6 @@
 package vn.edu.stu.doanchuyennganh.activiti;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -35,6 +38,7 @@ import java.util.ArrayList;
 import vn.edu.stu.doanchuyennganh.R;
 import vn.edu.stu.doanchuyennganh.adapter.LoaispAdapter;
 import vn.edu.stu.doanchuyennganh.adapter.SanphamAdapter;
+import vn.edu.stu.doanchuyennganh.model.GioHang;
 import vn.edu.stu.doanchuyennganh.model.LoaiSanPham;
 import vn.edu.stu.doanchuyennganh.model.SanPham;
 import vn.edu.stu.doanchuyennganh.ultil.Kiemtraketnoi;
@@ -57,6 +61,8 @@ public class Home extends AppCompatActivity {
 
     ArrayList<SanPham> mangsanpham;
     SanphamAdapter sanphamAdapter;
+
+    public static ArrayList<GioHang> manggiohang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +79,22 @@ public class Home extends AppCompatActivity {
            Kiemtraketnoi.Show(getApplicationContext(),"Bạn hãy kiểm tra lại kết nối");
            finish();
        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_giohang,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menugiohang:
+                Intent intent= new Intent(getApplicationContext(), vn.edu.stu.doanchuyennganh.activiti.GioHang.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void GetDuLieuSPMoi() {
@@ -179,6 +201,7 @@ public class Home extends AppCompatActivity {
     }
 
     private void addEvents() {
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
@@ -263,6 +286,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void addContent() {
@@ -283,5 +307,14 @@ public class Home extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setAdapter(sanphamAdapter);
+        if(manggiohang!=null)
+        {
+
+        }
+        else {
+            manggiohang= new ArrayList<>();
+
+        }
+
     }
 }

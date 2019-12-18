@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -63,7 +65,21 @@ public class BanhActivity extends AppCompatActivity {
             Kiemtraketnoi.Show(getApplicationContext(),"BẠN HÃY KIỂM TRA LẠI INTERNET");
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_giohang,menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menugiohang:
+                Intent intent= new Intent(getApplicationContext(), vn.edu.stu.doanchuyennganh.activiti.GioHang.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void addControls() {
         toolbarbanh = findViewById(R.id.toolbarBanh);
         lvbanh=(ListView) findViewById(R.id.listViewBanh);
