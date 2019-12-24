@@ -161,6 +161,7 @@ public class Home extends AppCompatActivity {
                    }
                    mangloaisp.add(5, new LoaiSanPham("Liên Hệ ","http://quanlegging.com/wp-content/uploads/2015/07/Call-icon-blue.png"));
                    mangloaisp.add(6, new LoaiSanPham("Thông Tin","https://cdn.pixabay.com/photo/2017/01/10/03/54/icon-1968237_960_720.png"));
+                   mangloaisp.add(7, new LoaiSanPham("LogOut","https://previews.123rf.com/images/tmricons/tmricons1510/tmricons151000278/45809602-door-sign-icon-login-symbol-.jpg"));
                 }
 
             }
@@ -282,6 +283,17 @@ public class Home extends AppCompatActivity {
                         }
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
+                    case 7:
+                        if (Kiemtraketnoi.haveNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(Home.this,MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Kiemtraketnoi.Show(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
+                        }
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+
                 }
             }
         });
@@ -312,7 +324,9 @@ public class Home extends AppCompatActivity {
 
         }
         else {
-            manggiohang= new ArrayList<>();
+            manggiohang= new ArrayList<>(
+
+            );
 
         }
 

@@ -1,102 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/nen"
     tools:context=".activiti.DangKi">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/SDT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Số Điện Thoại"
-            android:inputType="phone"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
-            android:textSize="34dp"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true" />
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/Email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:inputType="textWebEmailAddress"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
-            android:textSize="34dp"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true" />
-
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/HoTen"
-            android:hint="Họ Tên"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@android:color/black"
-            android:textColor="@android:color/black"
-            android:textSize="34dp"
-            android:inputType="textPersonName"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/UserName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tên đăng nhập"
-            android:inputType="textPersonName"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
-            android:textSize="34dp"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/mạkhau"
-            android:hint="Mật Khẩu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@android:color/black"
-            android:textColor="@android:color/black"
-            android:textSize="34dp"
-            android:inputType="textPassword"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true"/>
-    </LinearLayout>
-    <Button
-        android:id="@+id/btnDangKi"
-        android:text="Đăng kí"
-        android:textColor="@android:color/black"
-        android:background="@android:color/holo_green_dark"
-        android:layout_weight="1"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        />
+        android:layout_marginTop="50dp"
+        android:text="REGISTER"
+        android:textColor="#A20E0E"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/edtname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/edtemaillg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtname" />
+
+    <EditText
+        android:id="@+id/edtpasslg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="PassWord"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtemaillg" />
+
+    <EditText
+        android:id="@+id/edtpassconlg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="ConFrim PassWord"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtpasslg" />
+
+    <Button
+        android:id="@+id/btnlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtpassconlg" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,48 +34,51 @@ public class GioHang extends AppCompatActivity {
         setContentView(R.layout.activity_gio_hang);
         addControls();
         addEvents();
+        sukienListView();
         KiemTraDuLieu();
         DoDuLieu();
-        sukienListView();
+
     }
 
     private void sukienListView() {
-        lvGioHang.setOnItemLongClickListener((parent, view, position, id) -> {
-            pos=position;
-            AlertDialog.Builder builde = new AlertDialog.Builder(GioHang.this);
-            builde.setTitle("Xác nhận xoá sản phẩm");
-            builde.setMessage("Bạn có chắc chắn muốn xoá sản phẩm ");
-            builde.setNegativeButton("Khong", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    gioHangAdapter.notifyDataSetChanged();
-                    DoDuLieu();
-                }
-            });
-            builde.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if(Home.manggiohang.size()<=0)
-                    {
-                        txtThongBao.setVisibility(View.VISIBLE);
-                    }else {
-                        Home.manggiohang.remove(pos);
-                        gioHangAdapter.notifyDataSetChanged();
-                        DoDuLieu();
+        lvGioHang.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder= new AlertDialog.Builder(GioHang.this);
+                builder.setTitle("Bạn có muốn xoá sản phẩm");
+                builder.setMessage("Bạn có chắt xoá sản phẩm này");
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                         if(Home.manggiohang.size()<=0)
                         {
                             txtThongBao.setVisibility(View.VISIBLE);
                         }else {
-                            txtThongBao.setVisibility(View.INVISIBLE);
+                            Home.manggiohang.remove(position);
                             gioHangAdapter.notifyDataSetChanged();
                             DoDuLieu();
+
+                            if(Home.manggiohang.size()<=0)
+                            {txtThongBao.setVisibility(View.VISIBLE);}else {
+                                txtThongBao.setVisibility(View.INVISIBLE);
+                                gioHangAdapter.notifyDataSetChanged();
+                                DoDuLieu();
+                            }
                         }
                     }
-                }
-            });
-            builde.create().show();
-            return true;
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        gioHangAdapter.notifyDataSetChanged();
+                        DoDuLieu();
+                    }
+                });
+                builder.create().show();
+                return true;
+            }
         });
+
     }
 
     public static void DoDuLieu() {

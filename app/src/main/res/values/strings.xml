@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">DoAnChuyenNganh</string>
     <string name="title_activity_thong_tin">Map</string>
+    <string name="map_api_key">AIzaSyAuNfy7xUUpoFvDEzrnmgshHNwlMkdcCLI</string>
 </resources>

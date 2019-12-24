@@ -65,7 +65,7 @@ public class ThongTinActivity extends AppCompatActivity implements OnMapReadyCal
         LatLng stu = new LatLng(10.738001, 106.677975);
         mMap.addMarker(new MarkerOptions().position(stu).title("Trường Đại Học Công Nghệ Sài Gòn").snippet("180 Cao Lỗ Phường 4 Quận 8 Thành Phố Hồ Chí Minh").icon(BitmapDescriptorFactory.defaultMarker()));
         mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
-        CameraPosition cameraPosition=new CameraPosition.Builder().target(stu).zoom(15).build();
+        CameraPosition cameraPosition=new CameraPosition.Builder().target(stu).zoom(10).build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 }
